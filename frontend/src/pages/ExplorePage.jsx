@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
-const API_BASE = "http://localhost:5000/api";
+import { apiUrl } from "../config/api.js";
 const patterns = ["16x18","16x19","16x20","18x19","18x20"];
 const n = v => v === null || v === undefined || v === "" ? null : Number(v);
 const show = v => v === null || v === undefined || v === "" ? "—" : v;
@@ -11,7 +11,7 @@ export default function ExplorePage({ onNavigate, onViewRacket, demoMode=false, 
   const [search,setSearch]=useState(""), [brands,setBrands]=useState([]), [selectedBrands,setSelectedBrands]=useState([]), [selectedPatterns,setSelectedPatterns]=useState([]);
   const [sort,setSort]=useState("relevance"), [filtersOpen,setFiltersOpen]=useState(false);
   const [ranges,setRanges]=useState({headMin:"",headMax:"",stiffMin:"",stiffMax:"",weightMin:"",weightMax:"",swMin:"",swMax:""});
-  useEffect(()=>{fetch(`${API_BASE}/rackets`).then(r=>r.ok?r.json():Promise.reject(new Error(`Request failed (${r.status})`))).then(d=>{const all=Array.isArray(d)?d:(d.rackets||[]);setRackets(all);setBrands([...new Set(all.map(r=>r.brand_name||r.brand).filter(Boolean))].sort());}).catch(e=>setError(e.message)).finally(()=>setLoading(false));},[]);
+  useEffect(()=>{fetch(apiUrl("/rackets")).then(r=>r.ok?r.json():Promise.reject(new Error(`Request failed (${r.status})`))).then(d=>{const all=Array.isArray(d)?d:(d.rackets||[]);setRackets(all);setBrands([...new Set(all.map(r=>r.brand_name||r.brand).filter(Boolean))].sort());}).catch(e=>setError(e.message)).finally(()=>setLoading(false));},[]);
   const filtered=useMemo(()=>{
     let out=rackets.filter(r=>{const text=`${r.brand_name||r.brand||""} ${r.name||""}`.toLowerCase(); if(!text.includes(search.toLowerCase().trim())) return false; if(selectedBrands.length&&!selectedBrands.includes(r.brand_name||r.brand)) return false; if(selectedPatterns.length&&!selectedPatterns.includes(String(r.string_pattern).toLowerCase().replace("×","x"))) return false;
       const checks=[["headMin",r.head_size,">="],["headMax",r.head_size,"<="],["stiffMin",r.stiffness_ra,">="],["stiffMax",r.stiffness_ra,"<="],["weightMin",r.unstrung_weight_g,">="],["weightMax",r.unstrung_weight_g,"<="],["swMin",r.swingweight,">="],["swMax",r.swingweight,"<="]];

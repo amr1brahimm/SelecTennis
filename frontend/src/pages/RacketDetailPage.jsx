@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
-const API_BASE="http://localhost:5000/api";
+import { apiUrl } from "../config/api.js";
 const show=v=>v===null||v===undefined||v===""?"—":v;
 export default function RacketDetailPage({racketId,onNavigate,onBack,demoMode=false,demoSelection=[],onToggleDemo,onBookDemo}){
  const [racket,setRacket]=useState(null),[loading,setLoading]=useState(true),[error,setError]=useState("");
- useEffect(()=>{setLoading(true);fetch(`${API_BASE}/rackets`).then(r=>r.ok?r.json():Promise.reject(new Error(`Request failed (${r.status})`))).then(d=>{const all=Array.isArray(d)?d:(d.rackets||[]);const found=all.find(r=>Number(r.racket_id)===Number(racketId));if(!found)throw new Error("Racket not found.");setRacket(found);}).catch(e=>setError(e.message)).finally(()=>setLoading(false));},[racketId]);
+ useEffect(()=>{setLoading(true);fetch(apiUrl("/rackets")).then(r=>r.ok?r.json():Promise.reject(new Error(`Request failed (${r.status})`))).then(d=>{const all=Array.isArray(d)?d:(d.rackets||[]);const found=all.find(r=>Number(r.racket_id)===Number(racketId));if(!found)throw new Error("Racket not found.");setRacket(found);}).catch(e=>setError(e.message)).finally(()=>setLoading(false));},[racketId]);
  const selected=useMemo(()=>demoSelection.some(r=>Number(r.racket_id)===Number(racketId)),[demoSelection,racketId]); const full=demoSelection.length>=3&&!selected;
  if(loading)return <Shell onNavigate={onNavigate}><div className="mx-auto max-w-7xl px-6 py-20 text-center">Loading racket…</div></Shell>;
  if(error||!racket)return <Shell onNavigate={onNavigate}><div className="mx-auto max-w-7xl px-6 py-20"><button onClick={onBack}>← Back to Explore</button><div className="mt-6 rounded-2xl bg-error-container p-6 text-error">{error||"Racket not found."}</div></div></Shell>;

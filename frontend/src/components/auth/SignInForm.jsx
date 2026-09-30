@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiUrl } from "../../config/api.js";
 
 function SignInForm({ onCreateAccount, onSuccess }) {
   const [formData, setFormData] = useState({
@@ -27,16 +28,13 @@ function SignInForm({ onCreateAccount, onSuccess }) {
     setIsLoading(true);
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/auth/login",
-        {
+      const response = await fetch(apiUrl("/auth/login"), {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
-        }
-      );
+      });
 
       const data = await response.json();
 

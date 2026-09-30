@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiUrl } from "../../config/api.js";
 
 function CreateAccountForm({ onSignIn }) {
   const [formData, setFormData] = useState({
@@ -44,9 +45,7 @@ function CreateAccountForm({ onSignIn }) {
       const [day, month, year] = dateParts;
       const formattedDate = `${year}-${month}-${day}`;
 
-      const response = await fetch(
-        "http://localhost:5000/api/auth/register",
-        {
+      const response = await fetch(apiUrl("/auth/register"), {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -57,8 +56,7 @@ function CreateAccountForm({ onSignIn }) {
             height_cm: Number(formData.height_cm),
             weight_kg: Number(formData.weight_kg),
           }),
-        }
-      );
+      });
 
       const data = await response.json();
 

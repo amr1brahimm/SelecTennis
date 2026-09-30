@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000/api";
+import { apiUrl } from "../config/api.js";
 
 const OPTION_MAP = {
   1: { small_slight: 1, medium: 2, medium_built: 3, large_heavy: 4, large_built: 5 },
@@ -33,7 +33,7 @@ export function optionId(questionId, value) { return OPTION_MAP[questionId]?.[va
 
 async function request(path, options = {}) {
   const token = localStorage.getItem("token");
-  const response = await fetch(`${API_BASE}${path}`, {
+  const response = await fetch(apiUrl(path), {
     ...options,
     headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}), ...(options.headers || {}) },
   });
