@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0");
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700&family=Manrope:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap");
+
+@import "tailwindcss";
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "liga";
+}
+@theme {
+  /* SelecTennis — Stitch colors */
+  --color-primary: #0f382a;
+  --color-primary-container: #0f382a;
+  --color-on-primary: #ffffff;
+
+  --color-secondary: #546500;
+  --color-secondary-container: #d2f835;
+
+  --color-surface: #ecfef3;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #e6f8ed;
+  --color-surface-container: #e1f2e8;
+  --color-surface-container-high: #dbece2;
+  --color-surface-container-highest: #d5e7dc;
+
+  --color-on-surface: #101e18;
+  --color-on-surface-variant: #414844;
+
+  --color-outline: #717974;
+  --color-outline-variant: #c1c8c3;
+
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+
+  /* Stitch fonts */
+  --font-body-md: "Manrope", sans-serif;
+  --font-title-md: "Manrope", sans-serif;
+  --font-headline-md: "Epilogue", sans-serif;
+  --font-headline-sm: "Epilogue", sans-serif;
+  --font-label-md: "Space Grotesk", sans-serif;
+  --font-label-lg: "Space Grotesk", sans-serif;
+}
+:root {
+  font-family: "Epilogue", sans-serif;
+  color: #0f382a;
+  background: #eefbf5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  max-width: none;
+}
+
+body {
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
