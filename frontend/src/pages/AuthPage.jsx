@@ -43,11 +43,12 @@ return (
           />
         )}
 
-        {authView === "createAccount" && (
-          <CreateAccountForm
-            onSignIn={() => setAuthView("signIn")}
-          />
-        )}
+     {authView === "createAccount" && (
+  <CreateAccountForm
+    onSignIn={() => setAuthView("signIn")}
+    onSuccess={onAuthenticated}
+  />
+)}
 
       </section>
     </main>

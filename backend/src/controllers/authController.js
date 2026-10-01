@@ -118,10 +118,24 @@ if (
       ]
     );
 
-    res.status(201).json({
-      message: "Account created successfully",
-      user: result.rows[0],
-    });
+  const newUser = result.rows[0];
+
+const token = jwt.sign(
+  {
+    user_id: newUser.user_id,
+    email: newUser.email,
+  },
+  process.env.JWT_SECRET,
+  {
+    expiresIn: "7d",
+  }
+);
+
+res.status(201).json({
+  message: "Account created successfully",
+  token,
+  user: newUser,
+});
   } catch (error) {
     console.error("Registration error:", error);
 

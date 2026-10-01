@@ -190,6 +190,7 @@ const articleData = {
     intro:
       "Understand how the size of a racket head can influence forgiveness, hitting area, power, and precision.",
     icon: "sports_tennis",
+    image: "/images/learn/head-side.png",
     sections: [
       {
         heading: "What Is Head Size?",
@@ -231,6 +232,7 @@ const articleData = {
     intro:
       "Learn how weight distribution changes the way a racket handles even when its total weight remains the same.",
     icon: "balance",
+    image: "/images/learn/balance.png",
     sections: [
       {
         heading: "What Is Racket Balance?",
@@ -272,6 +274,7 @@ const articleData = {
     intro:
       "Explore three major playing characteristics and how racket design can influence the balance between them.",
     icon: "bolt",
+    image: "/images/learn/power-control-spin.png",
     sections: [
       {
         heading: "Understanding Power",
@@ -355,6 +358,7 @@ const articleData = {
     intro:
       "Understand how string material and tension can change the response and feel of your racket.",
     icon: "grid_view",
+    image: "/images/learn/strings-tension.png",
     sections: [
       {
         heading: "Why Strings Matter",
@@ -472,21 +476,22 @@ export default function ArticlePage({
 
         
         {/* Visual */}
-        <div className="mt-10 h-[300px] overflow-hidden rounded-[2rem] bg-primary shadow-sm sm:h-[420px]">
-        {article.image ? (
-            <img
-            src={article.image}
-            alt={article.title}
-            className="h-full w-full object-cover"
-            />
-        ) : (
-            <div className="grid h-full w-full place-items-center">
-            <span className="material-symbols-outlined text-[150px] text-secondary-container sm:text-[190px]">
-                {article.icon}
-            </span>
-            </div>
-        )}
-        </div>
+<div className="mt-10 overflow-hidden rounded-[2rem] shadow-sm">
+  {article.image ? (
+    <img
+      src={article.image}
+      alt={article.title}
+      className="block h-auto w-full"
+    />
+  ) : (
+    <div className="grid min-h-[300px] place-items-center bg-primary sm:min-h-[360px]">
+      <span className="material-symbols-outlined text-[150px] text-secondary-container sm:text-[190px]">
+        {article.icon}
+      </span>
+    </div>
+  )}
+</div>
+        
 
         {/* Article */}
         <article className="mx-auto mt-14 max-w-3xl">

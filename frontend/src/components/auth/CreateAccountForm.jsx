@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function CreateAccountForm({ onSignIn }) {
+function CreateAccountForm({ onSignIn, onSuccess }) {
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -67,8 +67,10 @@ function CreateAccountForm({ onSignIn }) {
         return;
       }
 
-      alert("Account created successfully!");
-      onSignIn();
+      localStorage.setItem("token", data.token);
+localStorage.setItem("user", JSON.stringify(data.user));
+
+onSuccess?.(data.user, "registered");
     } catch (error) {
       console.error("Registration error:", error);
       alert("Unable to connect to the server");

@@ -51,7 +51,7 @@ function SignInForm({ onCreateAccount, onSuccess }) {
         localStorage.setItem("user", JSON.stringify(data.user));
       }
 
-      onSuccess?.(data);
+     onSuccess?.(data.user, "login");
     } catch (error) {
       console.error("Login error:", error);
       setError("Unable to connect to the server");
