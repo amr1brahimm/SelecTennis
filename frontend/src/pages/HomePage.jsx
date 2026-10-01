@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import heroImage from "../assets/home-hero.png";
-const API_BASE = "http://localhost:5000/api";
+import { apiUrl } from "../config/api.js";
 
 
 const learnCards = [
@@ -49,7 +49,7 @@ function HomePage({
   const fullName = [storedUser?.first_name || storedUser?.firstName, storedUser?.last_name || storedUser?.lastName].filter(Boolean).join(" ") || firstName;
 
   useEffect(() => {
-  fetch(`${API_BASE}/rackets`)
+  fetch(apiUrl("/rackets"))
     .then((r) => (r.ok ? r.json() : Promise.reject()))
     .then((data) => {
       const allRackets = Array.isArray(data)

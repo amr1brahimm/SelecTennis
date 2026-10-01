@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { apiUrl } from "../config/api.js";
 
 import questions from "../questionnaire/questions";
 
@@ -29,7 +30,7 @@ function QuestionnairePage({ onExit, onContinue }) {
     (async () => {
       try {
         const [racketResponse, active] = await Promise.all([
-          fetch("http://localhost:5000/api/rackets"),
+          fetch(apiUrl("/rackets")),
           getActiveQuestionnaire(),
         ]);
         if (!racketResponse.ok) throw new Error("Failed to load rackets.");

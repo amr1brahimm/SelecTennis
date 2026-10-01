@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
+import { apiUrl } from "../config/api.js";
 
 export default function AccountPage({
   onNavigate,
@@ -20,14 +21,11 @@ export default function AccountPage({
       try {
         const token = localStorage.getItem("token");
 
-        const response = await fetch(
-          "http://localhost:5000/api/profile",
-          {
+        const response = await fetch(apiUrl("/profile"), {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }
-        );
+        });
 
         const data = await response.json();
 
@@ -76,17 +74,14 @@ const saveProfile = async () => {
 
     const token = localStorage.getItem("token");
 
-    const response = await fetch(
-      "http://localhost:5000/api/profile",
-      {
+    const response = await fetch(apiUrl("/profile"), {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(editForm),
-      }
-    );
+    });
 
     const data = await response.json();
 

@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-
-const API_BASE = "http://localhost:5000/api";
+import { apiUrl } from "../config/api.js";
 
 function ServicesPage({
   onRecommendation,
@@ -15,7 +14,7 @@ function ServicesPage({
   const fullName = [storedUser?.first_name || storedUser?.firstName, storedUser?.last_name || storedUser?.lastName].filter(Boolean).join(" ") || "Player";
 
   useEffect(() => {
-    fetch(`${API_BASE}/rackets`)
+    fetch(apiUrl("/rackets"))
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((data) => {
         const all = Array.isArray(data) ? data : Array.isArray(data.rackets) ? data.rackets : [];
